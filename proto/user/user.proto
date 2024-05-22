@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package user;
+
+option go_package = "alexeym.user.v1.user";
+
+service User {
+  rpc Create(CreateRequest) returns (CreateResponse);
+  rpc Profile(ProfileRequest) returns (ProfileResponse);
+  rpc List(ListRequest) returns (ListResponse);
+}
+
+message ProfileRequest {
+  string email = 1;
+}
+
+message ProfileResponse {
+  int64 id = 1;
+  string email = 2;
+  string password = 3;
+}
+
+message ListRequest {}
+
+message ListResponse {
+  repeated user users = 1;
+}
+
+message user {
+  int64 id = 1;
+  string email = 2;
+}
+
+message CreateRequest {
+  string email = 1;
+  string password = 2;
+}
+
+message CreateResponse {
+  bool success = 1;
+}

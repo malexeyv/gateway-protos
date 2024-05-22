@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package url;
+
+option go_package = "alexeym.url.v1.url";
+
+service Url {
+  rpc SaveURL(SaveRequest) returns (SaveResponse);
+  rpc GetURL(GetRequest) returns (GetResponse);
+  rpc List(ListRequest) returns (ListResponse);
+}
+
+message GetRequest {
+  string alias = 1;
+}
+
+message GetResponse {
+  string url = 1;
+}
+
+message ListRequest {}
+
+message ListResponse {
+  repeated UrlRecord records = 1;
+}
+
+message UrlRecord {
+  int64 id = 1;
+  string url = 2;
+  string alias = 3;
+}
+
+message SaveRequest {
+  string url = 1;
+  string alias = 2;
+}
+
+message SaveResponse {
+  bool success = 1;
+  string url = 2;
+  string alias = 3;
+  string message = 4;
+}
